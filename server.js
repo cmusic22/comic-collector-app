@@ -24,6 +24,8 @@ app.use(bodyParser.json())
 
 app.use('/api', api_routes(comic))
 
+
+
 //Start 
 var server = app.listen(process.env.PORT || 3000, function(){
 	console.log('app running on port', server.address().port)

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     newComicAdded(comics) {
-      this.$Comic_api.addComic(comics).then(
+      this.$comicService.addComic(comics).then(
         comics => {
           this.updateComics()
         }).catch(err => {
@@ -39,7 +39,7 @@ export default {
         })
     },
     updateComics() {
-      this.$Comic_api.getAllComic().then( comics => {
+      this.$comicService.getAllComics().then( comics => {
         this.comics = comics
       })
     }

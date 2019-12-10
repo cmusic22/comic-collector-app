@@ -3,7 +3,7 @@ import axios from 'axios'
 const listURL='api/comics-list'
 
 export default {
-	getAll(){
+	getAllComics(){
 		return axios.get(listURL).then( response => {
 			return response.data
 		})
