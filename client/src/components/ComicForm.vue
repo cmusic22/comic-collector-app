@@ -41,8 +41,8 @@
 		<label for="forSale">Is it for sale? </label>
 		<input type="checkbox" id="forSale" v-model.trim="forSale">
 	</div>
-	<button class="btn btn-primary" v-on:click.prevent="addComic">Enter Comic</button>
-	<router-link class="btn comicList-btn" to="/comic-list">View Comic List</router-link>
+	<button class="btn btn-primary" v-on:click="addComic">Enter Comic</button>
+	<router-link class="btn comicList-btn" to="/comics-list">View Comic List</router-link>
 </div>
 	
 
@@ -67,8 +67,8 @@ export default {
 		addComic() {
 			this.errors = []
 			if (this.title && this.issue && this.month && this.year && this.condition && this.pricePaid && this.currentValue && this.forSale) {
-				let comics = {title: this.title, issue: this.issue, month: this.month, year: this.year, condition: this.condition, pricePaid: this.pricePaid, currentValue: this.currentValue, forSale: this.forSale}
-				//add $emit for the message
+				let comics = {title: this.title, issue: this.issue, month: this.month, year: this.year, condition: this.condition, pricePaid: this.pricePaid, currentValue: this.currentValue,forSale: this.forSale}
+				this.$emit('comics-added',comics)
 				this.title = ''
 				this.issue = ''
 				this.month = ''

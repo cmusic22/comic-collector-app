@@ -14,7 +14,7 @@
 					<th>Current Price</th>
 					<th>For Sale?</th>
 				</tr>
-				<ComicRow v-for="comics in comics" v-bind:key="comics.name" v-bind:comics="comics">
+				<ComicRow v-for="comics in comics" v-bind:key="comics.title" v-bind:comics="comics">
 				</ComicRow>
 			</table>
 		</div>

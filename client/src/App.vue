@@ -2,7 +2,7 @@
   <div id="app">
     <Header></Header>
     <RouterView></RouterView>
-    <Message></Message>
+    <Message v-bind:message="message" v-bind:title="title"></Message>
     <Footer></Footer>
   </div>
 </template>
@@ -11,13 +11,13 @@
 import Header from './components/Header.vue'
 import Message from './components/Message.vue'
 import Footer from './components/Footer.vue'
-import ComicForm from './components/ComicForm.vue'
 export default {
   name: 'app',
   data(){
     return {
-      comics: []
-      //put message here
+      comics: [],
+      message: '',
+      title: '',
     }
   },
   components: {
@@ -30,16 +30,23 @@ export default {
   },
   methods: {
     newComicAdded(comics) {
-      this.$Comic_api.addComic(comics).then(
+      this.$comicService.addComic(comics).then(
         comics => {
           this.updateComics()
         }).catch(err => {
-          let msg=err.responce.data.join(',')
+          let msg = err.responce.data.join(',')
           alert('Error adding comic. \n' + msg)
         })
     },
+    comicAddedOrDeleted(comics) {
+      this.$comicService.updateComics(comics).then( () =>{
+        this.message = 'Was added, '
+        this.title = comics.title
+        this.updateComics
+      })
+    },
     updateComics() {
-      this.$Comic_api.getAllComic().then( comics => {
+      this.$comicService.getAllComics().then( comics => {
         this.comics = comics
       })
     }

@@ -11,8 +11,13 @@ export default new Router({
 		component: ComicForm
 	},
 	{
-		path: '/comic-list',
-		component: ComicTable
+		path: '/comics-list',
+		component: ComicTable,
+		data() {
+			return {
+				comics: []
+			}
+		}
 	},
 	{
 		path: '/about',
