@@ -37,10 +37,10 @@
 		<label for="currentValue">Current Value: </label>
 		<input type="number" id="currentValue" v-model.trim="currentValue">
 	</div>
-	<div>
+	<!--<div>
 		<label for="forSale">Is it for sale? </label>
 		<input type="checkbox" id="forSale" v-model.trim="forSale">
-	</div>
+	</div>-->
 	<button class="btn btn-primary" v-on:click="addComic">Enter Comic</button>
 	<router-link class="btn comicList-btn" to="/comics-list">View Comic List</router-link>
 </div>
@@ -66,9 +66,9 @@ export default {
 	methods: {
 		addComic() {
 			this.errors = []
-			if (this.title && this.issue && this.month && this.year && this.condition && this.pricePaid && this.currentValue && this.forSale) {
-				let comics = {title: this.title, issue: this.issue, month: this.month, year: this.year, condition: this.condition, pricePaid: this.pricePaid, currentValue: this.currentValue,forSale: this.forSale}
-				this.$emit('comics-added',comics)
+			if (this.title && this.issue && this.month && this.year && this.condition && this.pricePaid && this.currentValue) {
+				let comics = {title: this.title, issue: this.issue, month: this.month, year: this.year, condition: this.condition, pricePaid: this.pricePaid, currentValue: this.currentValue, forSale: false}
+				this.$emit(comics)
 				this.title = ''
 				this.issue = ''
 				this.month = ''
@@ -76,11 +76,20 @@ export default {
 				this.condition = ''
 				this.pricePaid = ''
 				this.currentValue = ''
-				this.forSale = ''
+			
 			} else {
 				this.errors.push('All feilds required') 
 			}
 		}
+
+		newComicAdded(comics) {
+      		this.$comicService.addComic(comics).then(
+        	comics => {
+          	this.updateComics()
+        }).catch(err => {
+          	let msg = err.responce.data.join(',')
+          	alert('Error adding comic. \n' + msg)
+        })
 	}
 }	
 </script>

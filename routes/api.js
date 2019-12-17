@@ -4,13 +4,13 @@ var express = require('express')
 module.exports = function(Comics) {
 	var router = express.Router()
 
-	router.get('/comics-list', function(req, res, next){
-		Comics.findAll().then( comics => {
+	router.get('/comics-list/:id', function(req, res, next){
+		Comics.findAll({order: ['title']}).then( comics => {
 			return res.json(comics)
 		
 	}).catch(err => next(err)) })
 
-	router.post('/comics-list', function(req, res, next){
+	router.post('/comics-list/:id', function(req, res, next){
 		Comics.create(req.body).then( (data) => {
 			return res.status(201).send('ok')
 		}).catch( err => {

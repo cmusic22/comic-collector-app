@@ -3,6 +3,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var Sequelize = require('sequelize')
 var api_routes = require('./routes/api.js')
+var path = require('path')
 
 //DB Config
 sequelize = new Sequelize({

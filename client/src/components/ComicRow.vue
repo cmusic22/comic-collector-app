@@ -13,12 +13,16 @@
 <script>
 export default {
 	name:'ComicRow',
-	props: {
-		comics: Object
+	data() {
+		return {
+			comics: []
+		}
 	},
 	methods: {
-		
-		
+		getComics() {
+      		this.$comicService.getAllComics().then( comics => {
+        	this.comics = comics
+      	})
 	}
 }
 </script>

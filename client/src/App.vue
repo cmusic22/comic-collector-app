@@ -29,15 +29,6 @@ export default {
     this.updateComics()
   },
   methods: {
-    newComicAdded(comics) {
-      this.$comicService.addComic(comics).then(
-        comics => {
-          this.updateComics()
-        }).catch(err => {
-          let msg = err.responce.data.join(',')
-          alert('Error adding comic. \n' + msg)
-        })
-    },
     comicAddedOrDeleted(comics) {
       this.$comicService.updateComics(comics).then( () =>{
         this.message = 'Was added, '
