@@ -82,14 +82,6 @@ export default {
 			}
 		}
 
-		newComicAdded(comics) {
-      		this.$comicService.addComic(comics).then(
-        	comics => {
-          	this.updateComics()
-        }).catch(err => {
-          	let msg = err.responce.data.join(',')
-          	alert('Error adding comic. \n' + msg)
-        })
 	}
 }	
 </script>

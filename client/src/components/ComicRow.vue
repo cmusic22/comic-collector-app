@@ -17,12 +17,6 @@ export default {
 		return {
 			comics: []
 		}
-	},
-	methods: {
-		getComics() {
-      		this.$comicService.getAllComics().then( comics => {
-        	this.comics = comics
-      	})
 	}
 }
 </script>
