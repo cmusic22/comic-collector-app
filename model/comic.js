@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			
 		}, pricePaid: {
-			type: DataTypes.DECIMAL,
+			type: DataTypes.DOUBLE,
 			
 		}, currentPrice: {
-			type: DataTypes.DECIMAL,
+			type: DataTypes.DOUBLE,
 			
 		}, forSale: {
 			type: DataTypes.BOOLEAN,

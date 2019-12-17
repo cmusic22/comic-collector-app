@@ -68,7 +68,9 @@ export default {
 			this.errors = []
 			if (this.title && this.issue && this.month && this.year && this.condition && this.pricePaid && this.currentValue) {
 				let comics = {title: this.title, issue: this.issue, month: this.month, year: this.year, condition: this.condition, pricePaid: this.pricePaid, currentValue: this.currentValue, forSale: false}
-				this.$emit(comics)
+				this.$comicService.add(comics).then(result => {
+					console.log('Comic was added to Database')
+				})//add catch block  
 				this.title = ''
 				this.issue = ''
 				this.month = ''
@@ -79,9 +81,8 @@ export default {
 			
 			} else {
 				this.errors.push('All feilds required') 
-			}
-		}
-
+			
+		}}
 	}
 }	
 </script>
