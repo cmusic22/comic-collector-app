@@ -5,17 +5,32 @@ var Sequelize = require('sequelize')
 var api_routes = require('./routes/api.js')
 var path = require('path')
 
+db_url = process.env.DATABASE_URL
+
+let sequelize
+
+if (db_url) {
+
 //DB Config
-sequelize = new Sequelize({
-	dialect: 'sqlite',
-	storage: './db.sqlite3'
+sequelize = new Sequelize(db_url, {
+	dialect: 'postgres',
 })
 
 //verify
 sequelize.authenticate()
-	.then(()=> console.log('connected to sqlite'))
+	.then(()=> console.log('connected to Postgres'))
 	.catch(err => console.log('error connecting', err))
+}
+else {
+	sequelize = new Sequelize({
+		dialect: 'sqlite',
+		storage: './db.sqlite3'
+	})
 
+	sequelize.authenticate()
+		.then(() => console.log('connected to sqlite'))
+		.catch(err => console.log(err))
+}
 //Initialize model
 let comic = require('./model/comic.js')(sequelize, Sequelize)
 
