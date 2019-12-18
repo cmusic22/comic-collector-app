@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 		}, pricePaid: {
 			type: DataTypes.DOUBLE,
 			
-		}, currentPrice: {
+		}, currentValue: {
 			type: DataTypes.DOUBLE,
 			
 		}, forSale: {

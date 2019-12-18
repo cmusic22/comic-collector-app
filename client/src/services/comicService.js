@@ -8,6 +8,17 @@ export default {
 			return response.data
 		})
 	},
+	getComicByYear(year){//this function should return comics with the matching year
+		    return axios.get(listURL, year).then( response => {
+		 	 	return response.data
+		    })
+		
+	},
+	getComicByCondition(condition){//thisfunction should retern comics with matching condition
+		return axios.get(listURL, condition).then(response => {
+			return response.data
+		})
+	},
 	addComic(comics){
 		return axios.post(listURL, comics).then(response => {
 			return response.data

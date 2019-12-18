@@ -12,12 +12,7 @@ export default new Router({
 	},
 	{
 		path: '/comics-list',
-		component: ComicTable,
-		data() {
-			return {
-				comics: []
-			}
-		}
+		component: ComicTable
 	},
 	{
 		path: '/about',
