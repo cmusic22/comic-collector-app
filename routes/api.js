@@ -45,27 +45,19 @@ module.exports = function(Comics) {
 	})
 
 	//this is supposed to get the entries with the year selected on the filter
-	router.patch('/comics-list/:year', function(req, res, next){
-		Comics.get(
-			req.body,{
+	// Use a get request to query, not a patch. Patch should be used for updates
+	router.get('/comics-list/year/:year', function(req, res, next){
+		Comics.findAll(
+			{
 				where: {
-					id: req.params.year
+					year: req.params.year   // match the year column 
 				}
 			}
-		).then((rowsModified) => {
-			if(!rowsModified[0]) {
-				return res.status(404).send('Not Found')
-			}else{
-				return res.send('ok')
-			}			
-		}).catch( err => {
-			if (err instanceof Sequelize.ValidationError){
-				let messages = err.errors.map( (e)=> e.messages)
-				return res.status(500).json(messages)
-			}
-			return next (err)
-		})
+		).then((comics) => {
+			return res.json(comics)
+		}).catch(err => next(err))
 	})
+
 	//this is supposed to get the entries with the condition selected on the filter
 	router.patch('/comics-list/:condition', function(req, res, next){
 		Comics.get(
@@ -74,19 +66,9 @@ module.exports = function(Comics) {
 					id: req.params.condition
 				}
 			}
-		).then((rowsModified) => {
-			if(!rowsModified[0]) {
-				return res.status(404).send('Not Found')
-			}else{
-				return res.send('ok')
-			}			
-		}).catch( err => {
-			if (err instanceof Sequelize.ValidationError){
-				let messages = err.errors.map( (e)=> e.messages)
-				return res.status(500).json(messages)
-			}
-			return next (err)
-		})
+		).then((comic) => {
+			return res.json(comics)
+		}).catch(err => next(err))
 	})
 
 
