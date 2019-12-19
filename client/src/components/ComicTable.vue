@@ -34,7 +34,7 @@
 		</div>
 		<div id="sortYear">
 			<label for="byYear">By Year</label>
-			<select class="filters" id="byYear">
+			<select class="filters" id="byYear" v-model="yearSelected">
 				<option value="1965">1965</option>
 				<option value="1966">1966</option>
 				<option value="1967">1967</option>
@@ -51,7 +51,7 @@
 				<option value="1978">1978</option>
 				<option value="1979">1979</option>
 			</select>
-			<button class="btn go-btn mb-2" v-on:click="sortByYear()">GO</button>
+			<button class="btn go-btn mb-2" v-on:click="filterByYear">GO</button>
 		</div>
 		<div id="sortCondition">
 			<label for="byCondition">By Condition</label>
@@ -71,7 +71,10 @@ export default {
 	name: 'ComicTable',
 	components:{ComicRow},
 	data() {
-		return {comics: []}
+		return {
+			comics: [],
+			yearSelected: ''
+		}
 	},
 	props: {
 		//comics: Array
@@ -79,6 +82,7 @@ export default {
 	},
 	mounted() {
 		this.getAllComics()
+		this.yearSelected = '1965'
 	},
 	methods:{
 		getAllComics(){
@@ -96,6 +100,14 @@ export default {
 			//make sure to ask the user if they are sure they want to delete the comic
 		}*/
 		/*sorting methods*/
+
+		filterByYear() {
+			// todo make sure a year is selected 
+			this.$comicService.filter('year', this.yearSelected).then( filteredComics => {
+				this.comics = filteredComics
+			}).catch( err => alert(err))   // todo better error handling
+		},
+
 		sortByCondition(){
 			let c = document.getElementById('byCondition').value();
 			let condition = c.options[c.selectedIndex].value;

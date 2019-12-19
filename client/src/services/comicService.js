@@ -8,6 +8,13 @@ export default {
 			return response.data
 		})
 	},
+	filter(filterBy, selection) {   // example ('year', 1970) to filter by all comics from year 1970
+		// request URL should be in the form /api/comics-list/year/1970
+		return axios.get(listURL + '/' + filterBy + '/' + selection).then( response => {
+			return response.data
+		})
+	},
+
 	getComicByYear(year){//this function should return comics with the matching year
 		    return axios.get(listURL, year).then( response => {
 		 	 	return response.data
